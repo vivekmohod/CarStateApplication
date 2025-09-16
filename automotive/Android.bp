@@ -1,0 +1,41 @@
+android_app {
+    name: "AAOSSampleApp",
+    manifest: "AndroidManifest.xml",
+    platform_apis: true,
+    certificate: "platform",
+    vendor: true,
+
+    srcs: [
+     	"src/**/*.java",
+        "src/**/*.kt",
+    ],
+
+    resource_dirs: ["res"],
+    
+    optimize: {
+        enabled: false,
+    },
+    
+    dex_preopt: {
+        enabled: false,
+    },
+        
+    static_libs: [    	
+    	"androidx.core_core",
+    	"androidx.core_core-ktx",
+    	"androidx.appcompat_appcompat",
+        "com.google.android.material_material",
+        "androidx.lifecycle_lifecycle-extensions",
+        "androidx.arch.core_core-runtime",
+	    "androidx.car.app",      // For androidx.car.app.* APIs
+        "android.car",          
+        "androidx.compose.runtime_runtime",
+        "androidx.compose.material3_material3",
+        "androidx.activity_activity-compose",
+        "androidx.compose.ui_ui",
+        "androidx.compose.ui_ui-tooling",
+        "androidx.lifecycle_lifecycle-viewmodel-compose",
+        "androidx.lifecycle_lifecycle-viewmodel-ktx",
+        "com.google.firebase:firebase-database-ktx"
+    ],
+}
