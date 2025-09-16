@@ -1,12 +1,20 @@
 package com.example.carstateapplication.helper
 
 import android.annotation.SuppressLint
+import android.car.Car
+import android.car.hardware.CarPropertyValue
+import android.car.hardware.property.CarPropertyManager
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.example.carstateapplication.listener.CarDataSpeedCallback
-import android.car.Car
+import android.car.CarNotConnectedException
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.gms.tasks.Task
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.data
+
 
 class CarPropertyHelper private constructor() {
     private var mContext: Context? = null
@@ -21,17 +29,19 @@ class CarPropertyHelper private constructor() {
     /**
      * Callback to listen for car speed change
      */
-    private val mSpeedCallback: CarPropertyManager.PropertyCallback<Float> =
-        object : PropertyCallback<Float?>() {
+    private val mSpeedCallback: CarPropertyManager.CarPropertyEventCallback<Float> =
+        object : CarPropertyManager.CarPropertyEventCallback<Float?>() {
             fun onChangeEvent(value: CarPropertyValue<Float?>?) {
                 value?.let {
-                    val speed: Float = value.getValue()
+                    val speed: Float? = value.getValue()
 
-                    dataCallbackInterface.onSpeedChanged(speed) // Sends current speed to CarDataViewModel to update UI
+                    speed?.let { it1 -> dataCallbackInterface.onSpeedChanged(it1) } // Sends current speed to CarDataViewModel to update UI
 
-                    if (speed > mMaxSpeed) {
-                        updateCarOverSpeed(speed)
-                        showWarningPopup(speed)
+                    speed?.let {
+                        if (speed > mMaxSpeed) {
+                            updateCarOverSpeed(speed)
+                            showWarningPopup(speed)
+                        }
                     }
                 }
             }
@@ -58,8 +68,8 @@ class CarPropertyHelper private constructor() {
         mContext = context
         mCar = Car(mContext) // 'this' is your Context
         try {
-            mCar.connect()
-            mCarPropertyManager = mCar.getCarManager(CarPropertyManager::class.java)
+            mCar!!.connect()
+            mCarPropertyManager = mCar!!.getCarManager(CarPropertyManager::class.java)
             mCarPropertyManager?.let {
                 // Handle the case where CarPropertyManager is not available
                 Log.e(
@@ -107,12 +117,12 @@ class CarPropertyHelper private constructor() {
             var vinValue: CarPropertyValue<String?>? = null
             mCarPropertyManager?.let {
                 try {
-                    vinValue = mCarPropertyManager.getProperty(
+                    vinValue = mCarPropertyManager!!.getProperty(
                         String::class.java, CarProperty.VEHICLE_IDENTIFICATION_NUMBER, 0
                     )
 
                     vinValue?.let {
-                        val vin: String = vinValue.getValue()
+                        val vin: String? = vinValue!!.getValue()
                         Log.d("VIN", "VIN: $vin")
                         // Use the VIN (e.g., display it in your app)
                     } ?: run {
@@ -131,7 +141,7 @@ class CarPropertyHelper private constructor() {
                 Log.e("VIN", "CarPropertyManager is null")
             }
             val vinValue1 = vinValue
-            return if (vinValue1 != null) vinValue1.getValue() else null
+            return if (vinValue1 != null) vinValue1.getValue().toString() else null.toString()
         }
 
     /**
@@ -175,7 +185,7 @@ class CarPropertyHelper private constructor() {
 
     fun unRegisterCar() {
         if (mCarPropertyManager != null) {
-            mCarPropertyManager.unregisterCallback(mSpeedCallback)
+            mCarPropertyManager!!.unregisterCallback(mSpeedCallback)
         }
     }
 

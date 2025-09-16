@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1013039392855",
+    "project_id": "carstateapplication",
+    "storage_bucket": "carstateapplication.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013039392855:android:be9243f7563fe2d7811b12",
+        "android_client_info": {
+          "package_name": "com.example.carstateapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4uMI6t58RgPKejDnLsN-k5kEalZ0MRvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

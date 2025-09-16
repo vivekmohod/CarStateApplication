@@ -28,14 +28,15 @@ android_app {
         "androidx.lifecycle_lifecycle-extensions",
         "androidx.arch.core_core-runtime",
 	    "androidx.car.app",      // For androidx.car.app.* APIs
-        "android.car",          
+        "android.car",
         "androidx.compose.runtime_runtime",
         "androidx.compose.material3_material3",
+        "androidx.compose.foundation:foundation-layout-android",
         "androidx.activity_activity-compose",
         "androidx.compose.ui_ui",
         "androidx.compose.ui_ui-tooling",
         "androidx.lifecycle_lifecycle-viewmodel-compose",
         "androidx.lifecycle_lifecycle-viewmodel-ktx",
-        "com.google.firebase:firebase-database-ktx"
+        "androidx.activity:activity-ktx"
     ],
 }

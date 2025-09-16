@@ -3,15 +3,16 @@
     package="com.example.carstateapplication"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.car.permission.VEHICLE_PROPERTIES" />
+    <uses-permission android:name="android.car.permission.CAR_SPEED" />
+
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AAOSTestApp"
+        android:theme="@style/Theme.CarStateApplication"
         tools:targetApi="31" />
 
 </manifest>

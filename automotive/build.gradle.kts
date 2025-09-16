@@ -3,6 +3,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -36,5 +37,21 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    useLibrary ("android.car")
+}
+
+
+
+dependencies {
+    implementation(libs.androidx.activity.ktx)
+    implementation(libs.androidx.foundation.layout.android)
+    implementation(libs.androidx.foundation.layout.desktop)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.ui.tooling.preview.android)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.bom)
+    implementation (libs.firebase.messaging)
+    implementation (libs.firebase.database)
+
 }
 
