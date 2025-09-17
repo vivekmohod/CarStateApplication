@@ -3,7 +3,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-    id("com.google.gms.google-services")
+    //id("com.google.gms.google-services")
 }
 
 android {
@@ -48,10 +48,7 @@ dependencies {
     implementation(libs.androidx.foundation.layout.desktop)
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.ui.tooling.preview.android)
-    implementation(libs.firebase.database.ktx)
     implementation(libs.firebase.bom)
     implementation (libs.firebase.messaging)
-    implementation (libs.firebase.database)
-
 }
 

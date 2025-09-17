@@ -11,10 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.carstateapplication.theme.MyApplicationTheme
 import com.example.carstateapplication.viewmodel.CarDataViewModel
-import java.lang.reflect.Modifier
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import com.example.carstateapplication.service.CarPropertyService
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,7 +28,6 @@ class MainActivity : ComponentActivity() {
         setContent {
             MyApplicationTheme {
                 SpeedWarningCompose(this)
-
             }
         }
     }
