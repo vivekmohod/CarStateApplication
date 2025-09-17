@@ -55,7 +55,7 @@ class CarPropertyHelper private constructor() {
         }
 
     private val mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val mDatabaseRef: DatabaseReference = mDatabase.getReference("/CarData")
+    private val mDatabaseRef: DatabaseReference = mDatabase.getReference("CarData")
 
     private var dataCallbackInterface: CarDataSpeedCallback? = null
 
