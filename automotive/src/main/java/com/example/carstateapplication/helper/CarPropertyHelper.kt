@@ -2,19 +2,18 @@ package com.example.carstateapplication.helper
 
 import android.annotation.SuppressLint
 import android.car.Car
+import android.car.CarNotConnectedException
 import android.car.hardware.CarPropertyValue
 import android.car.hardware.property.CarPropertyManager
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import com.example.carstateapplication.listener.CarDataSpeedCallback
-import android.car.CarNotConnectedException
-
+import com.example.carstateapplication.notification.NotificationSystem.createNotification
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseReference
-import com.google.firebase.data
 
 
 class CarPropertyHelper private constructor() {
@@ -42,10 +41,12 @@ class CarPropertyHelper private constructor() {
                         if (speed > mMaxSpeed) {
                             updateCarOverSpeed(speed)
                             showWarningPopup(speed)
+                            showNotification(speed)
                         }
                     }
                 }
             }
+
 
             fun onErrorEvent(propertyId: Int, errorCode: Int) {
                 Log.e("SpeedReader", "Error getting speed: $errorCode")
@@ -54,7 +55,7 @@ class CarPropertyHelper private constructor() {
         }
 
     private val mDatabase: FirebaseDatabase = FirebaseDatabase.getInstance()
-    private val mDatabaseRef: DatabaseReference = mDatabase.getReference()
+    private val mDatabaseRef: DatabaseReference = mDatabase.getReference("/CarData")
 
     private var dataCallbackInterface: CarDataSpeedCallback? = null
 
@@ -97,6 +98,16 @@ class CarPropertyHelper private constructor() {
 
         mVinNo = vinNo
         mMaxSpeed = getMaxSpeedForCar(mVinNo)
+    }
+
+    private fun showNotification(speed: Float) {
+        createNotification(
+            this,
+            "channel_id",
+            "Message",
+            "Max Speed Limit Exceeded. Max Speed is $speed",
+            null
+        )
     }
 
     /**

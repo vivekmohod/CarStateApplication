@@ -9,6 +9,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import com.example.carstateapplication.R
+import com.example.carstateapplication.helper.CarPropertyHelper
 
 
 object NotificationSystem {
@@ -28,7 +29,7 @@ object NotificationSystem {
     }
 
     fun createNotification(
-        context: Context,
+        context: CarPropertyHelper,
         channelId: String?,
         title: String?,
         message: String?,
